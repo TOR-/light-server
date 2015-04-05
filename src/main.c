@@ -13,7 +13,7 @@ void error(char *msg)
 
 int main(int argc, char *argv[])
 {
-     int sockfd, newsockfd, portno, clilen;
+     int sockfd, acceptsockfd, portno, clilen;
      char buffer[256];
      struct sockaddr_in serv_addr, cli_addr;
      int n;
@@ -34,14 +34,15 @@ int main(int argc, char *argv[])
               error("ERROR on binding");
      listen(sockfd,5);
      clilen = sizeof(cli_addr);
-     newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
-     if (newsockfd < 0) 
+     acceptsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
+     if (acceptsockfd < 0) 
           error("ERROR on accept");
+      //connection accepted
      bzero(buffer,256);
-     n = read(newsockfd,buffer,255);
+     n = read(acceptsockfd,buffer,255);
      if (n < 0) error("ERROR reading from socket");
      printf("Here is the message: %s\n",buffer);
-     n = write(newsockfd,"I got your message",18);
+     n = write(acceptsockfd,"I got your message",18);
      if (n < 0) error("ERROR writing to socket");
      return 0; 
 }
