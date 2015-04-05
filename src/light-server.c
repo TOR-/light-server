@@ -4,6 +4,7 @@
 #include <sys/types.h> 
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include "light-server.h"
 
 void error(char *msg)
 {
