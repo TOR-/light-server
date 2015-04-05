@@ -22,7 +22,7 @@ int parse_request(char buf[])
         }
         if(path)
         {
-          
+          n = write(acceptsockfd,path,strlen(path));
         }
       }
   }
