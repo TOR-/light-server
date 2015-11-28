@@ -1,6 +1,8 @@
 /* A simple server in the internet domain using TCP
    The port number is passed as an argument */
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <sys/types.h> 
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -19,9 +21,9 @@ int main(int argc, char *argv[])
      struct sockaddr_in serv_addr, cli_addr;
      int n;
      if (argc < 2) {
-         fprintf(stderr,"ERROR, no port provided\n");
-         exit(1);
+       error("ERROR, no port provided\n");
      }
+
      sockfd = socket(AF_INET, SOCK_STREAM, 0);
      if (sockfd < 0) 
         error("ERROR opening socket");
